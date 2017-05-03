@@ -5,7 +5,6 @@ results = []
 #file reading
 File.open("cat.txt", "r") do |f|
   f.each_line do |line|
-    puts line
     input << line.strip.gsub("\n", "").split('')
   end
 end
@@ -31,7 +30,7 @@ input.each do |array|
 end
 
 input.each_with_index do |values, index|
-  if index == 0
+  if index == 0 #for first row only
     inner_output = ['0']
     values.each_with_index do |value, inner_index|
       next if values[inner_index + 1].nil? || values[inner_index].nil?
@@ -43,12 +42,12 @@ input.each_with_index do |values, index|
     end
     output << inner_output
   else
-    inner_output = ['0'] #this will also change as now we have double comparisons
+    inner_output = [] #for second row to onwrad
     values.each_with_index do |value, inner_index|
-      next if values[inner_index + 1].nil? || values[inner_index].nil? #this will also change as now we have double comparisons
-      if values[inner_index + 1] != values[inner_index]
+      next if values[inner_index - 1].nil? || values[inner_index].nil?
+      if inner_index - 1 >= 0 && values[inner_index - 1] != values[inner_index]
         inner_output << '1'
-      elsif #my_condition
+      elsif input[index - 1][inner_index] != values[inner_index]
         inner_output << '1'
       else
         inner_output << '0'
@@ -57,5 +56,17 @@ input.each_with_index do |values, index|
     output << inner_output
   end
 end
+
+#print Input
+input_values = input.map { |array| array.join }
+puts "Input:"
+input_values.each do |line|
+  p line
+end
+
+#print output
 results = output.map { |array| array.join }
-puts "Output: #{results}"
+puts "Output:"
+results.each do |result|
+  p result
+end
