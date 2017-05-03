@@ -30,22 +30,20 @@ input.each do |array|
   end
 end
 
-
-puts "working code"
-
-# input.each_with_index do |values, index|
-#   if index == 0
-#     inner_output = ['0']
-#     values.each_with_index do |value, inner_index|
-#       if value[inner_index + 1] != value[inner_index]
-#         inner_output << '1'
-#       else
-#         inner_output << '0'
-#       end
-#     end
-#     output << inner_output
-#   else
-#   end
-# end
-# results = output.map { |array| array.join }
-# puts "Output: #{results}"
+input.each_with_index do |values, index|
+  if index == 0
+    inner_output = ['0']
+    values.each_with_index do |value, inner_index|
+      next if values[inner_index + 1].nil? || values[inner_index].nil?
+      if values[inner_index + 1] != values[inner_index]
+        inner_output << '1'
+      else
+        inner_output << '0'
+      end
+    end
+    output << inner_output
+  else
+  end
+end
+results = output.map { |array| array.join }
+puts "Output: #{results}"
