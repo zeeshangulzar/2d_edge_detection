@@ -43,6 +43,18 @@ input.each_with_index do |values, index|
     end
     output << inner_output
   else
+    inner_output = ['0'] #this will also change as now we have double comparisons
+    values.each_with_index do |value, inner_index|
+      next if values[inner_index + 1].nil? || values[inner_index].nil? #this will also change as now we have double comparisons
+      if values[inner_index + 1] != values[inner_index]
+        inner_output << '1'
+      elsif #my_condition
+        inner_output << '1'
+      else
+        inner_output << '0'
+      end
+    end
+    output << inner_output
   end
 end
 results = output.map { |array| array.join }
